@@ -6,7 +6,7 @@ echo "$INPUT_SERVICE_KEY" | base64 --decode > "$HOME"/gcloud.json
 
 if [ "$INPUT_ENVVARS" ]
 then
-    ENV_FLAG="--set-env-vars '$INPUT_ENVVARS'"
+    ENV_FLAG="--set-env-vars $INPUT_ENVVARS"
 else
     ENV_FLAG=""
 fi
