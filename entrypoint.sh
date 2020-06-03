@@ -4,16 +4,11 @@ set -e
 
 echo "$INPUT_SERVICE_KEY" | base64 --decode > "$HOME"/gcloud.json
 
-if [ "$INPUT_ENV" ]
+if [ "$INPUT_ENVVARS" ]
 then
-    ENVS=$(cat "$INPUT_ENV" | xargs | sed 's/ /,/g')
-fi
-
-if [ "$ENVS" ]
-then
-    ENV_FLAG="--set-env-vars $ENVS"
+    ENV_FLAG="--set-env-vars $INPUT_ENVVARS"
 else
-    ENV_FLAG="--clear-env-vars"
+    ENV_FLAG=""
 fi
 
 gcloud auth activate-service-account --key-file="$HOME"/gcloud.json --project "$INPUT_PROJECT"
